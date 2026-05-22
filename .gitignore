@@ -3,3 +3,6 @@ dist/
 build/
 .env
 .env.*
+
+.MOV
+.mp4

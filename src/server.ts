@@ -85,16 +85,17 @@ scheduler()
 app.use(express.json())
 app.use(cors())
 app.use(limiter)
+app.set('trust proxy', 1) // if server is hosted behind the proxy
 app.use(logResponses)
 
 function logResponses(req: Request, res: Response, next: NextFunction): void {
     res.on('finish', () => {
         const statusCode = res.statusCode
         if (statusCode !== 200) {
-            console.log(`[NON-OK] ${req.method} ${req.url} - Status: ${statusCode}`)
+            console.log(`[NON-OK] ${req.method} ${req.url} - Status: ${statusCode} IP: ${req.ip}`)
           }
         else{
-            console.log(`[OK] ${req.method} ${req.url} - Status: ${statusCode}`)
+            console.log(`[OK] ${req.method} ${req.url} - Status: ${statusCode} IP: ${req.ip}`)
         }
     })
     next()
@@ -108,6 +109,11 @@ function makeGetHandler(name: string, id: number){
     res.json(data)
   }
 }
+
+// test route 
+// app.get('/ip', (request, response) => {
+// 	response.send(request.ip);
+// });
 
 trackedBodies.forEach((body)=>{
   const route = body.name.toLowerCase().replace(/\s+/g, "-")

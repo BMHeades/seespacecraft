@@ -1,10 +1,10 @@
-#"SeeSpaceCraft" API
+# "SeeSpaceCraft" API
 
-##About
+## About
 Grabs data from NASA JPL Horizon and redistributes it in easy-to-use and scalable manner.
 Made as part of a Computer Science Club project at TCC Spring 2026.
 
-##API
+## API
 Available routes -
 
 ```
@@ -37,4 +37,4 @@ Return format
 Data is updated every hour.
 The x-y plane is based on the orbit of the Earth around the Sun centered at the Earth.
 
-For more information, visit [([NASA JPL HORIZONS]](https://ssd.jpl.nasa.gov/horizons/manual.html)
+For more information, visit [NASA JPL HORIZONS](https://ssd.jpl.nasa.gov/horizons/manual.html)

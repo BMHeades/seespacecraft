@@ -23,18 +23,18 @@ export async function horizons(majorBodyID: number) {
 
         const data = JSON.parse(data_text)
             const position = {
-            x: Number(data.result.match(/X\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
-            y: Number(data.result.match(/Y\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
-            z: Number(data.result.match(/Z\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
+            x: trim(Number(data.result.match(/X\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1])),
+            y: trim(Number(data.result.match(/Y\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1])),
+            z: trim(Number(data.result.match(/Z\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1])),
         }
         
         const velocity = {
-            x: Number(data.result.match(/VX\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
-            y: Number(data.result.match(/VY\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
-            Z: Number(data.result.match(/VZ\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
+            x: trim(Number(data.result.match(/VX\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1])),
+            y: trim(Number(data.result.match(/VY\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1])),
+            Z: trim(Number(data.result.match(/VZ\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1])),
         }
         
-        const distance = Number(data.result.match(/RG\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1])
+        const distance = trim(Number(data.result.match(/RG\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]))
     
         const updated_at = new Date(now).toISOString()
     
@@ -61,6 +61,10 @@ export async function horizons(majorBodyID: number) {
     }
 }
 
+function trim(num: number): number{
+    return Math.round(num / 50) * 50
+}
+
 // test 
-// const data = await horizons(-170)
-// console.log(data)
+const data = await horizons(-170)
+console.log(data)

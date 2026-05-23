@@ -16,6 +16,7 @@ Available routes -
 /james-webb
 /voyager-1
 /voyager-2
+and more coming!
 ```
 
 Return format

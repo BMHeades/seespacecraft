@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { Request, Response, NextFunction } from "express";
 import { horizons } from "./horizons.js";
 import 'dotenv/config'
@@ -44,6 +45,7 @@ scheduler()
 
 // middlewares
 app.use(express.json())
+app.use(cors())
 app.use(logResponses)
 
 function logResponses(req: Request, res: Response, next: NextFunction): void {

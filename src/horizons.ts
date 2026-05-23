@@ -66,5 +66,5 @@ function trim(num: number): number{
 }
 
 // test 
-const data = await horizons(-170)
-console.log(data)
+// const data = await horizons(-170)
+// console.log(data)

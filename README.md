@@ -1,6 +1,6 @@
-"See Space Craft" API
+#"See Space Craft" API
 
-Exposes 
+Available routes -
 
 ```
 /saturn
@@ -17,7 +17,7 @@ Format
 ```
 {
     id: number                  // JPL HORIZONS MAJOR BODY ID
-    updated_at: string          // LAST TIME DATA WAS UPDATED UTC
+    updated_at: string          // LAST TIME DATA WAS UPDATED IN UTC
     position{
         x: number               // POSITION X COORDINATE (km)
         y: number               // POSITION Y COORDINATE (km)

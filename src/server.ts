@@ -46,7 +46,7 @@ async function refreshAll() {
     await sleep(1000);
 
     try {
-      const result = await horizons(body.id);
+      const result = await horizons(body.name, body.id);
       data.push(result);
       console.log("[ROUTE] Refresh " + body.name) 
 

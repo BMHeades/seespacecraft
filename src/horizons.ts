@@ -1,6 +1,6 @@
 import { error } from "node:console";
 
-export async function horizons(majorBodyID: number) {
+export async function horizons(majorBodyName: string, majorBodyID: number) {
 
     const now = Date.now()
     const params = new URLSearchParams({
@@ -39,6 +39,7 @@ export async function horizons(majorBodyID: number) {
         const updated_at = new Date(now).toISOString()
     
         return {
+            name: majorBodyName,
             id: majorBodyID,
             updated_at,
             position,
@@ -66,5 +67,5 @@ function trim(num: number): number{
 }
 
 // test 
-// const data = await horizons(-170)
+// const data = await horizons("name", -170)
 // console.log(data)

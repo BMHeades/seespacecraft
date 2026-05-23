@@ -22,6 +22,7 @@ and more coming!
 Return format -
 ```
 {
+    name: string                // major body name
     id: number                  // JPL HORIZONS MAJOR BODY ID
     updated_at: string          // LAST TIME DATA WAS UPDATED IN UTC
     position{

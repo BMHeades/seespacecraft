@@ -16,6 +16,22 @@ const trackedBodies = [
   {
     name: "Space X Roadster",
     id: -143205
+  },
+  {
+    name: "James Webb",
+    id: -170
+  },
+  {
+    name: "Hubble",
+    id: -48
+  },
+  {
+    name: "Voyager 1",
+    id: -31
+  },
+  {
+    name: "Voyager 2",
+    id: -32
   }
 ]
 

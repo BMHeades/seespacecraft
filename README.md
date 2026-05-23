@@ -31,9 +31,9 @@ Return format -
         z: number               // POSITION Z COORDINATE (km)
     }
     velocity{
-        x: number               // VELOCITY X COORDINATE (km)
-        y: number               // VELOCITY Y COORDINATE (km)
-        z: number               // VELOCITY Z COORDINATE (km)
+        x: number               // VELOCITY X COORDINATE (m/s)
+        y: number               // VELOCITY Y COORDINATE (m/s)
+        z: number               // VELOCITY Z COORDINATE (m/s)
     }
     distance: number            // DISTANCE FROM CENTER OF THE EARTH (km)
 }

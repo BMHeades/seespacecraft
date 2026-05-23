@@ -29,9 +29,9 @@ export async function horizons(majorBodyName: string, majorBodyID: number) {
         }
         
         const velocity = {
-            x: trim(Number(data.result.match(/VX\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1])),
-            y: trim(Number(data.result.match(/VY\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1])),
-            Z: trim(Number(data.result.match(/VZ\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1])),
+            x: trim(Number(data.result.match(/VX\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]) * 1000),
+            y: trim(Number(data.result.match(/VY\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]) * 1000),
+            Z: trim(Number(data.result.match(/VZ\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]) * 1000),
         }
         
         const distance = trim(Number(data.result.match(/RG\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]))
@@ -67,5 +67,5 @@ function trim(num: number): number{
 }
 
 // test 
-// const data = await horizons("name", -170)
-// console.log(data)
+const data = await horizons("name", -143205)
+console.log(data)

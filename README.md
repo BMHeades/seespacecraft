@@ -19,7 +19,7 @@ Available routes -
 and more coming!
 ```
 
-Return format
+Return format -
 ```
 {
     id: number                  // JPL HORIZONS MAJOR BODY ID

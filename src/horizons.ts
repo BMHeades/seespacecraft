@@ -1,3 +1,5 @@
+import { error } from "node:console";
+
 export async function horizons(majorBodyID: number) {
 
     const now = Date.now()
@@ -14,29 +16,51 @@ export async function horizons(majorBodyID: number) {
         method: "GET",
         mode: "cors",
     })
-    const data = await response.json()
+    const data_text = await response.text()
 
-    const position = {
-        x: Number(data.result.match(/X\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
-        y: Number(data.result.match(/Y\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
-        z: Number(data.result.match(/Z\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
-    }
     
-    const velocity = {
-        x: Number(data.result.match(/VX\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
-        y: Number(data.result.match(/VY\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
-        Z: Number(data.result.match(/VZ\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
-    }
+    try{
+
+        const data = JSON.parse(data_text)
+            const position = {
+            x: Number(data.result.match(/X\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
+            y: Number(data.result.match(/Y\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
+            z: Number(data.result.match(/Z\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
+        }
+        
+        const velocity = {
+            x: Number(data.result.match(/VX\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
+            y: Number(data.result.match(/VY\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
+            Z: Number(data.result.match(/VZ\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1]),
+        }
+        
+        const distance = Number(data.result.match(/RG\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1])
     
-    const distance = Number(data.result.match(/RG\s*=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/)[1])
-
-    const updated_at = new Date(now).toISOString()
-
-    return {
-        id: majorBodyID,
-        updated_at,
-        position,
-        velocity,
-        distance
+        const updated_at = new Date(now).toISOString()
+    
+        return {
+            id: majorBodyID,
+            updated_at,
+            position,
+            velocity,
+            distance
+        }
+    }
+    catch(err){
+        // data rate limit
+        if(data_text.startsWith("<!DOCTYPE")){
+            console.log(`[RATE LIMIT] Could not fetch data for ${majorBodyID}`)
+        }
+        return {
+            id: 0,
+            updated_at: 0,
+            position: 0,
+            velocity: 0,
+            distance:0
+        }
     }
 }
+
+// test 
+// const data = await horizons(-170)
+// console.log(data)

@@ -7,6 +7,7 @@ import 'dotenv/config'
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
 
 const trackedBodies = [
   {
@@ -39,11 +40,24 @@ const trackedBodies = [
 let dataInMemory = await refreshAll()
 
 async function refreshAll() {
-  const data = await Promise.all(
-    trackedBodies.map((body) => horizons(body.id))
-  )
-  console.log("[REFRESH]", new Date().toISOString())
-  return data
+  const data: any[] = [];
+
+  for (const body of trackedBodies) {
+    await sleep(1000);
+
+    try {
+      const result = await horizons(body.id);
+      data.push(result);
+      console.log("[ROUTE] Refresh " + body.name) 
+
+    } catch (err) {
+      console.error("Failed:", body.name, err);
+      data.push(null);
+    }
+  }
+
+  console.log("[UPDATE] Done ", new Date().toISOString());
+  return data;
 }
 
 async function scheduler() {
@@ -92,5 +106,6 @@ trackedBodies.forEach((body)=>{
 })
 
 app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
+  console.log(`[SERVER] Running at http://localhost:${PORT}`);
 })
+

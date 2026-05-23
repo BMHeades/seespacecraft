@@ -1,7 +1,9 @@
 # "SeeSpaceCraft" API
 
-## About
-Grabs data from NASA JPL Horizon and redistributes it in easy-to-use and scalable manner.
+Easy to use API that tracks multiple space objects.
+
+## Under the hood
+Uses NASA JPL Horizons and distributes data in a scalable manner.
 Made as part of a Computer Science Club project at TCC Spring 2026.
 
 ## API

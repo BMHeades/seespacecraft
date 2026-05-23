@@ -1,4 +1,6 @@
 import express from "express";
+import { rateLimit } from 'express-rate-limit'
+
 import cors from "cors";
 import { Request, Response, NextFunction } from "express";
 import { horizons } from "./horizons.js";
@@ -8,6 +10,12 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
+
+// rate limited to 10 requests per 10 minutes
+const limiter = rateLimit({
+	windowMs: 60 * 1000 * 10,
+	limit: 10,
+})
 
 const trackedBodies = [
   {
@@ -76,6 +84,7 @@ scheduler()
 // middlewares
 app.use(express.json())
 app.use(cors())
+app.use(limiter)
 app.use(logResponses)
 
 function logResponses(req: Request, res: Response, next: NextFunction): void {

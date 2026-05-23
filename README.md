@@ -1,19 +1,22 @@
-#"See Space Craft" API
+#"SeeSpaceCraft" API
 
+##About
+Grabs data from NASA JPL Horizon and redistributes it in easy-to-use and scalable manner.
+Made as part of a Computer Science Club project at TCC Spring 2026.
+
+##API
 Available routes -
 
 ```
 /saturn
 /space-x-roadster
 /hubble
-/james-1web
+/james-webb
 /voyager-1
 /voyager-2
 ```
 
-Update interval - 1 hour
-
-Format
+Return format
 ```
 {
     id: number                  // JPL HORIZONS MAJOR BODY ID
@@ -31,3 +34,7 @@ Format
     distance: number            // DISTANCE FROM CENTER OF THE EARTH (km)
 }
 ```
+Data is updated every hour.
+The x-y plane is based on the orbit of the Earth around the Sun centered at the Earth.
+
+For more information, visit [([NASA JPL HORIZONS]](https://ssd.jpl.nasa.gov/horizons/manual.html)
